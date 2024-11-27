@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 
-const getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll();
         res.status(200).json(users);
@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
     }
 }; 
 
-const getUserById = async (req, res) => {
+export const getUserById = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         res.status(200).json(user);
@@ -18,7 +18,7 @@ const getUserById = async (req, res) => {
     }
 };
 
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
     try {
@@ -48,7 +48,7 @@ const updateUser = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
         const user = await User.findByPk(id);
@@ -63,4 +63,3 @@ const deleteUser = async (req, res) => {
     }
 };
 
-export { getAllUsers, getUserById, createUser, updateUser, deleteUser };
